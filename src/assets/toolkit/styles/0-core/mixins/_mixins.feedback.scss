@@ -1,0 +1,5 @@
+
+@mixin illuminate-on-hover {
+  opacity: .4;
+  @include hoverify { opacity: 1; }
+}

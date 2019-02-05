@@ -5,17 +5,26 @@ $popup-button-close-color: $black-tundora;
 
 /* Positions popup within a page. */
 .popup-positioner {
+  @include position(0, null, auto, null, fixed);
   z-index: $z-index-max;
-  position: fixed;
-  bottom: 0;
   display: none;
-  margin: 0 0 2.5em 5%;
-  width: $popup-width;
+  margin: 0;
+  width: 100%;
+
+  @include breakpoint( $from: tablet) {
+    @include position(auto, null, 0, null, fixed);
+    margin: $gap-larger;
+    width: $popup-width;
+  }
 
   &.shown { display: block; }
 }
 
 .popup {
+  @include breakpoint( $until: tablet ) {
+    margin: 0; // TM: Not sure why this is set.. in theory it'd be zero by default??
+  }
+  
   display: none;
   padding: $gap;
   background-color: $grey-gallery;
@@ -31,16 +40,16 @@ $popup-button-close-color: $black-tundora;
 
     // 'x' button
     .btn-close {
+      @include illuminate-on-hover;
+
       float: right;
       display: block;
-      margin: .1em .25em;
-      padding: 0 .35em;
+      margin: $gap-tiny $gap-small;
+      padding: 0 $gap-small;
       color: $popup-button-close-color;
-      opacity: .4;
+      
       font-size: 170%;
       line-height: 1;
-
-      @include hoverify { opacity: 1; }
     }
 
     &:not(:last-child) { margin-bottom: $gap-content; }
@@ -54,17 +63,6 @@ $popup-button-close-color: $black-tundora;
   .btn-holder {
     .btn { margin: 0; }
   }
-}
-
-@include breakpoint( $until: tablet ) {
-  .popup-positioner {
-    top: 0;
-    bottom: auto;
-    margin: 0;
-    width: 100%;
-  }
-
-  .popup { margin: 0; }
 }
 
 

@@ -203,3 +203,49 @@
 }
 
 
+/*= POSITION ===================================================================*/
+
+
+/// Sets position properties in a single statement.
+///
+///
+/// @argument {number (with unit) | string} $top
+///
+/// @argument {number (with unit) | string} $right
+///
+/// @argument {number (with unit) | string} $bottom
+///
+/// @argument {number (with unit) | string} $left
+///
+/// @argument {number (with unit) | string} $position
+///
+/// @example scss
+///   .first-element {
+///     @include position(2px);
+///   }
+///
+///   // CSS Output
+///   .first-element {
+///     top: 2px;
+///     position: relative;
+///   }
+///
+/// @example scss
+///   .second-element {
+///     @include position(10px, '', '', 20px, fixed);
+///   }
+///
+///   // CSS Output
+///   .second-element {
+///     top: 10px;
+///     left: 20px;
+///     position: fixed;
+///   }
+
+@mixin position($top: null, $right: null, $bottom: null, $left: null, $position: relative) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
