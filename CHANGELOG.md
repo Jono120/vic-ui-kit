@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 
+- **Updated logos** - New logo format.
 - **Tooltip UI** - Can be automatically or dynamically initialised, used as a part of `toolkit` library or standalone. Can be triggered 'on hover' or 'on click'.
 - **Basic configuration for unit testing and snapshotting** - Can be run through `npm run test`.
 - **Template block with image** - Container template to display an image with text and title.
@@ -29,6 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - **PDF tag's colour aligned with colour of the red generic tag**
 - **PG/UG switcher - Automatically loads the content of the tab that is selected when the page is rendered**
 - **Updates all 3rd party build & deployment libraries to their latest versions**
+- **Hub mega menu expand Icon** - Expand icon changed to down caret.
 
 
 
