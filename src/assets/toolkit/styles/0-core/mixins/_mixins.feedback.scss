@@ -1,4 +1,19 @@
+/*============================================================================*\
+| MIXINS TO PROVIDE USER FEEDBACK
+\*============================================================================*/
 
+////
+/// Defines variables that can be used to set major font-based properties.
+///
+/// @group feedback
+
+
+
+/// @access public
+///
+/// Reduces element opacity initially and illuminates on hover
+///
+/// @require {mixin} hoverify
 @mixin illuminate-on-hover {
   opacity: .4;
   @include hoverify { opacity: 1; }
