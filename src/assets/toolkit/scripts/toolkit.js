@@ -815,10 +815,12 @@ function hubMegaMenu() {
 }
 
 function hubMegaMenu2() {
-  const menu = $('.hub-mega-menu .mega-menu-inner');
-  const menuExpandButton = $('.hub-mega-menu .btn-expander').parent();
+  const menu = $('.c-megamenu .c-megamenu__inner');
+  const menuExpandButton = menu.find("[aria-haspopup]").closest('.c-megamenu__item');
   let mobile = false;
   let desktop = false;
+  let expanded = menu.attr("aria-expanded") != '' ? true: false;
+
 
   enquire.register( DESKTOP_AND_LARGER, function() {
     desktop = true;
@@ -830,13 +832,13 @@ function hubMegaMenu2() {
   });
 
   menuExpandButton.each( function() {
-
     let $this = $(this);
 
     //Create and append Title to list of expanded links 
     let title = $this.children('a').text();
     let titleLink = $this.children('a').attr('href');
-    let newLink = `<li class="js-inject-title"><a href="${titleLink}"> ${title} </a></li>`;
+
+    let newLink = `<li class="c-megamenu__childItem js-inject-title"><a class="c-megamenu__childLink" href="${titleLink}"> ${title} </a></li>`;
 
     $this.children('ul').prepend(newLink);
     
@@ -845,10 +847,12 @@ function hubMegaMenu2() {
         c.preventDefault();
         
         if ( desktop ) {
-          menu.toggleClass('expanded');
+          menu.toggleClass('is-expanded');
+          expanded = !expanded;
+          menu.attr("aria-expanded", expanded);
         }
         if ( mobile) {
-          menu.addClass('expanded');
+          menu.addClass('is-expanded');
           $this.toggleClass('js-dropdown-show');
         }
       });
@@ -869,7 +873,7 @@ if( document.getElementsByClassName('hub-mega-menu').length > 0 && !document.get
 }
 
 /* New hub mega menu */
-if( document.getElementsByClassName('hub-mega-menu').length > 0 && document.getElementsByClassName('mega-menu-bar').length > 0){
+if( document.getElementsByClassName('mega-menu-bar').length > 0){
 
   hubMegaMenu2();
   console.log('new menu bar strip thing cool ');
