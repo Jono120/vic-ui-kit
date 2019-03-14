@@ -819,7 +819,7 @@ function hubMegaMenu2() {
   const menuExpandButton = menu.find("[aria-haspopup]").closest('.c-megamenu__item');
   let mobile = false;
   let desktop = false;
-  let expanded = menu.attr("aria-expanded") != '' ? true: false;
+  let expanded = menu.attr("aria-expanded") != '' ? false: true;
 
 
   enquire.register( DESKTOP_AND_LARGER, function() {
@@ -843,7 +843,7 @@ function hubMegaMenu2() {
     $this.children('ul').prepend(newLink);
     
     // subnav expand function
-    $(this).on('click', (c) => {
+    $(this).children("a").on('click', (c) => {
         c.preventDefault();
         
         if ( desktop ) {

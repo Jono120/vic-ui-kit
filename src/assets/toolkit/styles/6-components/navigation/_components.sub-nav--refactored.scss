@@ -23,10 +23,18 @@
     flex-grow: 1;
   }
 
+  &.is-active {
+    position: relative;
+    background:$green-bottle;
+  }
+
   .is-expanded & {
-    &:hover {
+    &:hover{
       background:$green-bottle;
       box-shadow: $shadow;
+    }
+    &.is-active {
+      background:darken($green-bottle, 2%);
     }
   }
 }
@@ -38,17 +46,56 @@
   color: $white;
   font-family: $heading-family;
   font-size: $navigation-primary-item-size;
+  line-height: 1;
   color: $white;
   text-decoration: none;
   letter-spacing: $navigation-letter-spacing;
   font-weight: 600;
+
+  @include breakpoint(desktop) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &::before {
+    .is-active & {  
+      z-index: 999;
+      @include objectify($position: absolute);
+      @include scalable-rectangle-vertical( $border-width-medium, 30px );
+      left: 12px;
+      border-color: $white;
+      transition: height .3s ease;
+
+      .is-expanded & {
+        height: 60px;
+      }
+    }
+  }
+
+  .is-expanded & {
+    @include breakpoint(desktop) {
+      max-height: 62px;
+    }
+  }
+  .is-active & {
+    padding-left: $gap;
+  }
 }
 
 .c-megamenu__itemIcon {
   float:right;
-
+  display: block;
+  margin-left: $gap-small * 2;
+  transform-origin: center;
+  
   i:before {
     margin: 0;
+  }
+
+  .is-expanded & {
+    transform: rotate(-180deg);
   }
 }
 
@@ -60,6 +107,7 @@
   display: none;
   margin: 0 $gap $gap-half;
   border-left: 1px solid rgba( $white, .1 );
+
 
   @include breakpoint(desktop) {
     margin-left: $gap-half;
