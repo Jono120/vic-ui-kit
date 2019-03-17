@@ -61,15 +61,19 @@
 
   &::before {
     .is-active & {  
-      z-index: 999;
-      @include objectify($position: absolute);
-      @include scalable-rectangle-vertical( $border-width-medium, 30px );
-      left: 12px;
-      border-color: $white;
-      transition: height .3s ease;
+      @include breakpoint(desktop) {
+        z-index: 999;
+        @include objectify($position: absolute);
+        @include scalable-rectangle-vertical( $border-width-medium, 30px );
+        left: 12px;
+        border-color: $white;
+        transition: height .3s ease;
+      }
 
       .is-expanded & {
-        height: 60px;
+        @include breakpoint(desktop) {
+          height: 60px;
+        }
       }
     }
   }
@@ -95,6 +99,12 @@
   }
 
   .is-expanded & {
+    @include breakpoint(desktop) {
+      transform: rotate(-180deg);
+    }
+  }
+  
+  .js-dropdown-show & {
     transform: rotate(-180deg);
   }
 }
@@ -108,14 +118,18 @@
   margin: 0 $gap $gap-half;
   border-left: 1px solid rgba( $white, .1 );
 
-
   @include breakpoint(desktop) {
     margin-left: $gap-half;
   }
 
-  .js-dropdown-show &,
-  .is-expanded & {
+  .js-dropdown-show & {
     display: block;
+  }
+  
+  .is-expanded & {
+    @include breakpoint(desktop) {
+      display: block;
+    }
   }
 }
 
