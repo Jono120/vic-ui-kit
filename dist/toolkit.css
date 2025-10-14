@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/** Version: 0.10.13 | Monday, September 8, 2025, 10:35 AM */
+/** Version: 0.10.13 | Tuesday, October 14, 2025, 1:16 PM */
 @charset "UTF-8";
 /*============================================================================*\
 | VICTORIA UI TOOLKIT STYLES
@@ -17533,7 +17533,7 @@ body#hubv4 .sidemenu.sidemenu-homepage, body#hubv4 body:not(#hubv4) .sidemenu-ba
 }
 
 body#hubv4 .sidemenu-banner-wrap {
-  z-index: 10;
+  z-index: 4;
   position: relative;
   margin-bottom: 1rem;
 }
