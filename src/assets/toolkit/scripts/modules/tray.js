@@ -226,7 +226,7 @@ export function initTray() {
   function expandTray(index, listItem) {
     $(listItem).on("mouseenter click keyup", (e) => {
       //promo hideshow logic
-      // console.log($(this).attr("data-for"));
+      console.log($(this).attr("data-for"));
       var $navItemID = $(`#${$(this).attr("data-for")}`);
       // console.log($navItemID.length);
       $("[id^=draw]").hide();
@@ -422,6 +422,33 @@ export function initTray() {
   if ($(".sidemenu-homepage").length) {
     enquire.register(DESKTOP_AND_LARGER, () => {
       sidemenuTray();
+
+      // Close sidemenu drawer when mouse leaves the content area.
+      // Adds a small delay so accidental mouseouts don't immediately close it.
+      let sidemenuLeaveTimeout;
+      const $sidemenuDrawer = $(".sidemenu-drawer");
+      const $sidemenuHomepage = $(".sidemenu-homepage");
+
+      function scheduleCloseOnLeave() {
+        clearTimeout(sidemenuLeaveTimeout);
+        sidemenuLeaveTimeout = setTimeout(() => {
+          if (sidemenuExpanded) {
+            closeDraw();
+          }
+        }, 200);
+      }
+
+      function cancelScheduledClose() {
+        clearTimeout(sidemenuLeaveTimeout);
+      }
+
+      // When the mouse leaves either the homepage menu or the drawer, schedule close
+      $sidemenuHomepage.on("mouseleave", scheduleCloseOnLeave);
+      $sidemenuDrawer.on("mouseleave", scheduleCloseOnLeave);
+
+      // Cancel closing when mouse re-enters
+      $sidemenuHomepage.on("mouseenter", cancelScheduledClose);
+      $sidemenuDrawer.on("mouseenter", cancelScheduledClose);
     });
   }
 
