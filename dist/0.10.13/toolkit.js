@@ -1,4 +1,4 @@
-/** Version: 0.10.13 | Tuesday, October 14, 2025, 1:16 PM */
+/** Version: 0.10.13 | Wednesday, December 17, 2025, 3:15 PM */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -14511,7 +14511,32 @@ function initTray() {
 
   if ($(".sidemenu-homepage").length) {
     src_default.a.register(DESKTOP_AND_LARGER, function () {
-      sidemenuTray();
+      sidemenuTray(); // Close sidemenu drawer when mouse leaves the content area.
+      // Adds a small delay so accidental mouseouts don't immediately close it.
+
+      var sidemenuLeaveTimeout;
+      var $sidemenuDrawer = $(".sidemenu-drawer");
+      var $sidemenuHomepage = $(".sidemenu-homepage");
+
+      function scheduleCloseOnLeave() {
+        clearTimeout(sidemenuLeaveTimeout);
+        sidemenuLeaveTimeout = setTimeout(function () {
+          if (sidemenuExpanded) {
+            closeDraw();
+          }
+        }, 200);
+      }
+
+      function cancelScheduledClose() {
+        clearTimeout(sidemenuLeaveTimeout);
+      } // When the mouse leaves either the homepage menu or the drawer, schedule close
+
+
+      $sidemenuHomepage.on("mouseleave", scheduleCloseOnLeave);
+      $sidemenuDrawer.on("mouseleave", scheduleCloseOnLeave); // Cancel closing when mouse re-enters
+
+      $sidemenuHomepage.on("mouseenter", cancelScheduledClose);
+      $sidemenuDrawer.on("mouseenter", cancelScheduledClose);
     });
   } // **********
   // Horizontal Nav

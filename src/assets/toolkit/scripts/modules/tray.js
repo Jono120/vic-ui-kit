@@ -226,7 +226,7 @@ export function initTray() {
   function expandTray(index, listItem) {
     $(listItem).on("mouseenter click keyup", (e) => {
       //promo hideshow logic
-      console.log($(this).attr("data-for"));
+      // console.log($(this).attr("data-for"));
       var $navItemID = $(`#${$(this).attr("data-for")}`);
       // console.log($navItemID.length);
       $("[id^=draw]").hide();
